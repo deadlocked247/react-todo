@@ -7,10 +7,13 @@ var App = React.createClass({
     },
 
     updateItems: function(newItem) {
+
         var all = this.state.items.concat([newItem]);
-        this.setState({
-            items: all
-        })
+        if(newItem && newItem.length > 0) {
+            this.setState({
+                items: all
+            })
+        }
     },
 
     render: function() {
@@ -23,7 +26,6 @@ var App = React.createClass({
         )
     }
 })
-
 
 var Banner = React.createClass({
     render: function() {
@@ -41,7 +43,10 @@ var List = React.createClass({
                     <Item key={text}>{text}</Item>
                 );
             };
-            return <ul>{this.props.items.map(create)}</ul>;
+            var name = "";
+            this.props.items.length > 0 ? name = "collection" : name = "";
+
+            return <ul className={name}>{this.props.items.map(create)}</ul>;
         }
 })
 
@@ -55,21 +60,15 @@ var Item = React.createClass({
         this.setState({show:!this.state.show});
     },
     render: function() {
-        var style =
-        {
-            position: "relative",
-            opacity: 1,
-            left: 0,
-            marginRight: 10
-        };
+
         if(this.state.show) {
-            var s = "";
+            var s = "collection-item";
         }
         else {
-            var s = "cross";
+            var s = "collection-item cross";
         }
         return (
-            <li className={s}><input onClick={this.reverseItem} style={style} type="checkbox"></input>{this.props.children}</li>
+            <li onClick={this.reverseItem} className={s}>{this.props.children}</li>
         )
     }
 })
@@ -96,7 +95,6 @@ var Form = React.createClass({
             <form onSubmit={this.handleSubmit}>
                 <input onChange={this.onChange} value={this.state.item} ref='item' placeholder="Type something todo here" type="text" className="validate"/>
                 <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i className="material-icons right">send</i>
                 </button>
             </form>
         )

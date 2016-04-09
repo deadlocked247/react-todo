@@ -9,10 +9,13 @@ var App = React.createClass({ displayName: "App",
     },
 
     updateItems: function updateItems(newItem) {
+
         var all = this.state.items.concat([newItem]);
-        this.setState({
-            items: all
-        });
+        if (newItem && newItem.length > 0) {
+            this.setState({
+                items: all
+            });
+        }
     },
 
     render: function render() {
@@ -32,7 +35,10 @@ var List = React.createClass({ displayName: "List",
         var create = function create(text) {
             return React.createElement(Item, { key: text }, text);
         };
-        return React.createElement("ul", null, this.props.items.map(create));
+        var name = "";
+        this.props.items.length > 0 ? name = "collection" : name = "";
+
+        return React.createElement("ul", { className: name }, this.props.items.map(create));
     }
 });
 
@@ -46,18 +52,13 @@ var Item = React.createClass({ displayName: "Item",
         this.setState({ show: !this.state.show });
     },
     render: function render() {
-        var style = {
-            position: "relative",
-            opacity: 1,
-            left: 0,
-            marginRight: 10
-        };
+
         if (this.state.show) {
-            var s = "";
+            var s = "collection-item";
         } else {
-            var s = "cross";
+            var s = "collection-item cross";
         }
-        return React.createElement("li", { className: s }, React.createElement("input", { onClick: this.reverseItem, style: style, type: "checkbox" }), this.props.children);
+        return React.createElement("li", { onClick: this.reverseItem, className: s }, this.props.children);
     }
 });
 
@@ -79,7 +80,7 @@ var Form = React.createClass({ displayName: "Form",
     },
 
     render: function render() {
-        return React.createElement("form", { onSubmit: this.handleSubmit }, React.createElement("input", { onChange: this.onChange, value: this.state.item, ref: "item", placeholder: "Type something todo here", type: "text", className: "validate" }), React.createElement("button", { className: "btn waves-effect waves-light", type: "submit", name: "action" }, "Submit", React.createElement("i", { className: "material-icons right" }, "send")));
+        return React.createElement("form", { onSubmit: this.handleSubmit }, React.createElement("input", { onChange: this.onChange, value: this.state.item, ref: "item", placeholder: "Type something todo here", type: "text", className: "validate" }), React.createElement("button", { className: "btn waves-effect waves-light", type: "submit", name: "action" }, "Submit"));
     }
 });
 
