@@ -1,0 +1,33 @@
+{
+  "name": "todo-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deadlocked247/react-todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deadlocked247/react-todo/issues"
+  },
+  "homepage": "https://github.com/deadlocked247/react-todo#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-react": "^3.1.0",
+    "gulp-watch": "^4.3.5",
+    "path": "^0.12.7",
+    "react": "^15.0.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
